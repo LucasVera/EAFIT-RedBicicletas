@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="d-flex flex-column m-0 p-0">
+      <div class="bg-light">
+        <h2 class="text-primary pt-2 px-3">Red Bicicletas</h2>
+        <hr class="mb-0 pb-0">
+      </div>
+      <div class="container mt-2">
+        <div class="row my-5">
+          <div class="col-12">
+            <ul class="list-group d-flex flex-column">
+              <% for (let i = 0; i < bicicletas.length; i++) { %>
+                <li class="list-group-item">
+                  <div class="card d-flex flex-row">
+                    <div>
+                      <img class="img-fluid" style="max-width: 350px; height: auto;" src="images/bycicle.png" alt="">
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                      <h5><strong>Nombre </strong> <small><%=bicicletas[i].name %> </small></h5>
+                      <h5><strong>Color </strong> <small><%=bicicletas[i].color %></small> </h5>
+                      <h5><strong>Latitud </strong> <small><%=bicicletas[i].latitude %></small> </h5>
+                      <h5><strong>Longitud </strong> <small><%=bicicletas[i].longitude %></small> </h5>
+                    </div>
+                    <div class="d-flex justify-content-center mx-3">
+                      <form id="<%= i %>" class="form-group" action="/bicicleta/delete" method="POST">
+                        <input type="hidden" value="<%= bicicletas[i].name %>" name="bicicletaToDelete" id="bicicletaToDelete" class="form-control" placeholder="Longitud">
+                        <input type="submit" value="Eliminar" class="btn btn-lg btn-danger my-3">
+                      </form>
+                    </div>
+                  </div>
+                </li>
+              <%} %>
+            </ul>
+            <div class="d-flex flex-row">
+              <a class="btn btn-lg btn-primary m-4" href="/">Refrescar lista</a>
+              <a class="btn btn-lg btn-danger m-4" href="/bicicleta/delete-all">Eliminar todas las bicicletas</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <h3 class="my-2">Crear bicicleta nueva</h3>
+            <form class="form-group" action="/bicicleta" method="POST">
+              <label for="name">Nombre</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Nombre Bicicleta">
+
+              <label for="latitude">Latitud</label>
+              <input type="text" name="latitude" id="latitude" class="form-control" placeholder="Latitud">
+
+              <label for="longitude">Longitud</label>
+              <input type="text" name="longitude" id="longitude" class="form-control" placeholder="Longitud">
+
+              <label for="color">Color</label>
+              <input type="text" name="color" id="color" class="form-control" placeholder="Color">
+
+              <input type="submit" value="Crear" class="btn btn-lg my-3 btn-primary">
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <h3>Borrar bicicleta</h3>
+              <form class="form-group" action="/bicicleta/delete" method="POST">
+                <label for="bicicletaName"></label>
+                <input type="text" name="bicicletaName" id="bicicletaName" class="form-control" placeholder="Nombre">
+
+                <input type="submit" value="Eliminar" class="btn btn-lg btn-danger my-3">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
