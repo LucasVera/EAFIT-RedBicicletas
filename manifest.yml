@@ -1,0 +1,9 @@
+applications:
+  - name: redbici
+    memory: 256M
+    disk_quota: 512M
+    buildpack: nodejs_buildpack
+    host: redbicicletaslucas
+    command: npm start
+    env:
+      env_type: development

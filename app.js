@@ -47,8 +47,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.server.listen(3000, () => {
-  console.log('Started on port 3000');
+const port = process.env.PORT || 3000;
+app.server.listen(port, () => {
+  console.log(`Started on port ${port}`);
 })
 
 module.exports = app;
