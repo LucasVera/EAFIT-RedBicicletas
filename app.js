@@ -10,6 +10,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const apiRoutes = require('./routes/api');
+const initDb = require('./db/init');
 
 var app = express();
 app.server = http.createServer(app);
@@ -50,6 +51,8 @@ app.use(function(err, req, res, next) {
 const port = process.env.PORT || 3000;
 app.server.listen(port, () => {
   console.log(`Started on port ${port}`);
+  console.log('starting DB')
+  initDb();
 })
 
 module.exports = app;

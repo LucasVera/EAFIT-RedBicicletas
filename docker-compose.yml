@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  redBicicletas:
+    image: 'node:12-alpine3.10'
+    build: .
+    container_name: 'redBici'
+    environment:
+      NODE_ENV: development
+      NODE_PATH: /
+    ports:
+      - '1111:1111'
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  
+  mongodb:
+    image: mongo:3.4.10
+    container_name: 'redBici-mongodb'
+    volumes:
+      - redBici-mongo-data:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null
+
+volumes:
+  redBici-mongo-data:
